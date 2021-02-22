@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "nodejs_book-serverless_applications-executor",
+    "name": "nodejs_book-serverless_applications",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "yerd2fs5vk",
+    "module": "api"
+  }
+}
