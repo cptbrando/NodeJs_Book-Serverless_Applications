@@ -61,41 +61,32 @@ describe("Create order handler", () => {
 });
 
 describe("Update order handler", () => {
-  test("it should throw an exception when an order id is not passed in as an argument", () => {
+  test("it should throw an exception when an order id is not passed in as an argument", async () => {
     const updateOrderBody = {
       id: 2,
       address: "test address",
     };
 
-    expect(() => updateOrder(null, updateOrderBody)).toThrow();
+    await expect(updateOrder(null, updateOrderBody)).rejects.toThrow();
   });
 
-  test("it should throw an exception when an updated order body is not passed in as an argument", () => {
-    expect(() => updateOrder(1, null)).toThrow();
+  test("it should throw an exception when an updated order body is not passed in as an argument", async () => {
+    await expect(updateOrder(1, null)).rejects.toThrow();
   });
 
-  test("it should throw an exception when the updated order body does not have both an id and an address", () => {
+  test("it should throw an exception when the updated order body does not have both an id and an address", async () => {
     const updateOrderBody = {};
 
-    expect(() => updateOrder(1, updateOrderBody)).toThrow();
+    await expect(updateOrder(1, updateOrderBody)).rejects.toThrow();
   });
 
-  test("it should return an object when a valid id and updated order body are passed into the function as arguments", () => {
-    const updateOrderBody = {
-      id: 2,
-      address: "test address",
-    };
-
-    expect(updateOrder(1, updateOrderBody)).toBeInstanceOf(Object);
-  });
+  // TODO: Add test for successful case for updating an order
 });
 
 describe("Delete order handler", () => {
-  test("it should throw an exception when an order id is not passed in", () => {
-    expect(() => deleteOrder()).toThrow();
+  test("it should throw an exception when an order id is not passed in", async () => {
+    await expect(deleteOrder()).rejects.toThrow();
   });
 
-  test("it should return the delted object when a proper order id is passed in", () => {
-    expect(deleteOrder(1)).toBeInstanceOf(Object);
-  });
+  // TODO: Add test for successful case for deleting an order
 });
