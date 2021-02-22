@@ -30,24 +30,24 @@ describe("Get Pizza(s) handler", () => {
 });
 
 describe("Create order handler", () => {
-  test("it should throw an exception if an order object is not passed in as an argument", () => {
-    expect(() => createOrder()).toThrow();
+  test("it should throw an exception if an order object is not passed in as an argument", async () => {
+    await expect(createOrder()).rejects.toThrow();
   });
 
-  test("it should throw an exception if the passed in order object does not have a pizza id property", () => {
+  test("it should throw an exception if the passed in order object does not have a pizza id property", async () => {
     const order = {
       address: "test address",
     };
 
-    expect(() => createOrder(order)).toThrow();
+    await expect(createOrder(order)).rejects.toThrow();
   });
 
-  test("it should throw an exception if the passed in order object does not have an address property", () => {
+  test("it should throw an exception if the passed in order object does not have an address property", async () => {
     const order = {
       id: "test id",
     };
 
-    expect(() => createOrder(order)).toThrow();
+    await expect(createOrder(order)).rejects.toThrow();
   });
 
   test("it should return an object if the passed in order argument has valid properties", () => {
