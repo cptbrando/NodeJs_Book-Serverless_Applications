@@ -8,16 +8,19 @@ const getOrders = require("./handlers/get-orders");
 const createOrder = require("./handlers/create-order");
 const updateOrder = require("./handlers/update-order");
 const deleteOrder = require("./handlers/delete-order");
+const updateDeliveryStatus = require("./handlers/update-delivery-status");
 
+// root api route
 api.get("/", () => {
   return "Welcome to the Pizza API created using Claudia with Node.js!";
 });
 
-// Pizzas
+// Get all pizzas
 api.get("/pizzas", () => {
   return getPizzas();
 });
 
+// get one pizza
 api.get(
   "/pizzas/{id}",
   (request) => {
@@ -28,15 +31,17 @@ api.get(
   }
 );
 
-// Orders
+// Get all orders
 api.get("/orders", () => {
   return getOrders();
 });
 
+// Get one order
 api.get("/orders/{id}", (request) => {
   return getOrders(request.pathParams.id);
 });
 
+// Create order
 api.post(
   "/orders",
   (request) => {
@@ -48,6 +53,7 @@ api.post(
   }
 );
 
+// Update order
 api.put(
   "/orders/{id}",
   (request) => {
@@ -58,6 +64,7 @@ api.put(
   }
 );
 
+// Delete order
 api.delete(
   "/orders/{id}",
   (request) => {
@@ -67,5 +74,11 @@ api.delete(
     error: 400,
   }
 );
+
+// Update delivery status webhook
+api.post("/delivery", (request) => updateDeliveryStatus(request.body), {
+  success: 200,
+  error: 400,
+});
 
 module.exports = api;

@@ -36,10 +36,12 @@ async function updateOrder(id, order) {
         TableName: "pizza-orders",
         Key: { orderId: id },
         AttributeUpdates: attributeUpdateObj,
+        ReturnValues: "ALL_NEW",
       })
       .promise();
 
-    return updatedOrder;
+    // Return all of the attributes of the updated order
+    return updatedOrder.attributes;
   } catch (err) {
     throw err;
   }
